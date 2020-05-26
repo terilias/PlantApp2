@@ -16,6 +16,7 @@ public class DataBaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_data_base);
         //αποκτώ αναφορά στα view objects
         plantName=findViewById(R.id.editTextPlantName);
         info=findViewById(R.id.textViewInform);
@@ -34,9 +35,12 @@ public class DataBaseActivity extends AppCompatActivity {
 //            plantName.setText("");
 //        }
 
-        setContentView(R.layout.activity_data_base);
+
     }
 
+    /**
+     * H μέθοδος onClick για το addButton.
+     */
     public void addPlant(View view){
         MyDBHandler dbHandler=new MyDBHandler(this,null,null,1);//το αντικείμενο για την επικοινωνία με τη βάση δεδομένων
         String name=plantName.getText().toString();//παίρνουμε το όνομα που έδωσε ο χρήστης
@@ -45,7 +49,7 @@ public class DataBaseActivity extends AppCompatActivity {
             Plant found=dbHandler.findPlant(name);
             //εάν δεν υπάρχει στη βάση το προσθέτουμε και επαναφέρουμε το editText στην προηγούμενη κατάσταση, με το placeHolder
             if(found==null){
-                Plant plant=new Plant(name,"date");
+                Plant plant=new Plant(plantName.getText().toString(),"date");
                 dbHandler.addPlant(plant);
                 plantName.setText(" ");
                 Toast.makeText(getApplicationContext(), "sucess!", Toast.LENGTH_SHORT).show();
@@ -59,7 +63,9 @@ public class DataBaseActivity extends AppCompatActivity {
             //εμφάνιση μηνύματος ότι δεν μπορεί να δώσει κενή επιλογή
         }
     }
-
+    /**
+     * H μέθοδος onClick για το searchButton.
+     */
     public void searchPlant(View view){
         MyDBHandler dbHandler=new MyDBHandler(this,null,null,1);//το αντικείμενο για την επικοινωνία με τη βάση δεδομένων
         String name=plantName.getText().toString();//παίρνουμε το όνομα που έδωσε ο χρήστης
@@ -84,7 +90,9 @@ public class DataBaseActivity extends AppCompatActivity {
         }
 
     }
-
+    /**
+     * H μέθοδος onClick για το delButton.
+     */
     public void delPlant(View view){
         MyDBHandler dbHandler=new MyDBHandler(this,null,null,1);//το αντικείμενο για την επικοινωνία με τη βάση δεδομένων
         String name=plantName.getText().toString();//παίρνουμε το όνομα που έδωσε ο χρήστης

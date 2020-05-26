@@ -52,7 +52,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
      * @return plant το φυτό που ψάχνουμε
      */
     public Plant findPlant(String plantName){
-        String query="SELECT * FROM "+TABLE_PLANTS+"WHERE "+COLUMN_PLANTNAME+" = '"+plantName+"'";
+        String query = "SELECT * FROM " + TABLE_PLANTS + " WHERE " +
+                COLUMN_PLANTNAME + " = '" + plantName + "'";
         SQLiteDatabase db=this.getWritableDatabase();
         Cursor cursor=db.rawQuery(query,null);
         Plant plant=new Plant();
@@ -76,7 +77,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
      */
     public boolean deletePlant(String plantName){
         boolean result=false;
-        String query="SELECT * FROM "+TABLE_PLANTS+"WHERE "+COLUMN_PLANTNAME+" = '"+plantName+"'";
+        String query = "SELECT * FROM " + TABLE_PLANTS + " WHERE " +
+               COLUMN_PLANTNAME + " = '" + plantName + "'";
         SQLiteDatabase db=this.getWritableDatabase();
         Cursor cursor=db.rawQuery(query,null);
         Plant plant=new Plant();
