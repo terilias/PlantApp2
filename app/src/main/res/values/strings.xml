@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">PlantApp</string>
+    <string name="first_placeholder">Αρχική Οθόνη</string>
+    <string name="second_placeholder">Here user will add a plant to database.</string>
+    <string name="third_placeholder">Here user will show hes plants with cardView.</string>
+    <string name="first_menu">Αρχική</string>
+    <string name="second_menu">Προσθήκη φυτού</string>
+    <string name="third_menu">Gallery</string>
+    <string name="textViewPlantName">Όνομα φυτού:</string>
+    <string name="buttonDelete">Διαγραφή</string>
+    <string name="editTextPlantName">π.χ.μελιτζάνα λευκή</string>
+    <string name="buttonSearch">Αναζήτηση</string>
+    <string name="buttonAdd">Προσθήκη</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="plantingDate">Φυτεύθηκε στις:</string>
+    <string name="FertilDate">Την τελευταία φορά που λιπάνθηκε ήταν:</string>
+</resources>
