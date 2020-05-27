@@ -12,6 +12,10 @@
         android:icon="@drawable/ic_add"
         android:title="@string/second_menu" />
     <item
+        android:id="@+id/menu_fertil"
+        android:icon="@drawable/ic_fertil"
+        android:title="@string/menu_fertil" />
+    <item
         android:id="@+id/menu_gallery"
         android:icon="@drawable/ic_plant"
         android:title="@string/third_menu" />
