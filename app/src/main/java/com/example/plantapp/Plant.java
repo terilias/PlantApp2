@@ -8,33 +8,33 @@ import java.util.Date;
  * Αυτή η κλάση είναι η Data Model Class, δηλαδή αναπαριστά τα αντικείμενα των φυτών για να αποθηκευθούν στη βάση δεδομένων.
  */
 public class Plant {
-    private int id;
-    private String plantName;
-    private String plantingDate;
+    private int id;//id φυτού
+    private String plantName;//όνομα φυτού
+    private String plantingDate;//ημερομηνία φύτευσης
+    private String fertilDate;//ημερομηνία που το φυτό δέχθηκε λίπασμα για τελευταία φορά
 
     public Plant(){
 
     }
-    /**
-     * Όταν δημιουργείται ένα αντικείμενο, η ημερομηνία τίθεται στην τρέχουσα ημέρα.
-     */
-    public Plant(String name,String date) {
+
+    public Plant(String name,String plantingDate,String fertilDate) {
         this.plantName=name;
-        this.plantingDate=date;
-    //ο σκοπός είναι να κρατάται η τρέχουσα ημερομηνία ως εξής:
-//        Date c = Calendar.getInstance().getTime();
-//        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
-//        String formattedDate = df.format(c);
-//        this.plantingDate = formattedDate;
+        this.plantingDate=plantingDate;
+        this.fertilDate=fertilDate;
+    }
+
+    public String getFertilDate() {
+        return fertilDate;
+    }
+
+    public void setFertilDate(String fertilDate) {
+        this.fertilDate = fertilDate;
     }
 
     public String getplantingDate() {
         return plantingDate;
     }
 
-    /**
-     * Θέτει την ημερομηνία φύτευσης στην τρέχουσα ημερομηνία.
-     */
     public void setplantingDate(String date) {
        this.plantingDate=date;
     }
