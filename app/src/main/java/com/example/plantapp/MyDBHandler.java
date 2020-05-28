@@ -109,17 +109,22 @@ public class MyDBHandler extends SQLiteOpenHelper {
     /**
      * Υλοποιεί την λειουργία update για την τιμή της στήλης COLUMN_FERTILDATE ώστε να κρατάει την τελευταία ημερομηνία λίπανσης.
      * Η λίπανση γίνεται για ένα συγκεκριμένο φυτό.
-     * @param plant το φυτό που δέχεται το λίπασμα
+     * @param name το όνομα για το φυτό που δέχεται το λίπασμα
      * @param date  η ημερομηνία που δέχθηκε το λίπασμα
      */
-    public void fertilPlant(Plant plant,String date){
-        ContentValues values=new ContentValues();
-        values.put(COLUMN_PLANTNAME,plant.getPlantName());
-        values.put(COLUMN_PLANTINGDATE,plant.getplantingDate());
-        values.put(COLUMN_FERTILDATE,plant.getFertilDate());
-        SQLiteDatabase db=this.getWritableDatabase();
-        db.update(TABLE_PLANTS,values,COLUMN_ID+" = ?",new String[] {String.valueOf(plant.getId())});
+    public void fertilPlant(String name,String date){
+        String query = "UPDATE "+ TABLE_PLANTS+" SET "+ COLUMN_FERTILDATE+" = "+date+ " WHERE "+COLUMN_PLANTNAME+ " = '"+ name+"'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(query);
         db.close();
+//        Plant plant=findPlant(name);
+//        ContentValues values=new ContentValues();
+//        values.put(COLUMN_PLANTNAME,plant.getPlantName());
+//        values.put(COLUMN_PLANTINGDATE,plant.getplantingDate());
+//        values.put(COLUMN_FERTILDATE,date);
+//        SQLiteDatabase db=this.getWritableDatabase();
+//        db.update(TABLE_PLANTS,values,COLUMN_ID+" = ?",new String[] {String.valueOf(plant.getId())});
+
 
     }
 

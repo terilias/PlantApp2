@@ -38,13 +38,6 @@ public class DataBaseActivity extends MainActivity {
         buttonDel=findViewById(R.id.buttonDelete);
         //αλλαγή της μπάρας της εφαρμογής για να φαίνεται το όνομα της τρέχουσας δραστηριότητας
         getSupportActionBar().setTitle(R.string.second_menu);
-        /*Στη συνέχεια θα πάρουμε την τρέχουσα ημερομηνία και θα την τοποθετήσουμε στο
-        πεδίο εισόδου ημερομηνίας σαν default τιμή. Μπορεί φυσικά ο χρήστης να αλλάξει
-        την τιμή του για να προσθέσει ένα φυτό που φύτευσε παλαιότερα.
-        */
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-        String date = df.format(Calendar.getInstance().getTime());
-        dateInput.setText(date);
         //ανάκτηση δεδομένων εισόδου για την περίπτωση αλλαγής κατάστασης της συσκευής (π.χ.rotate)
         if (savedInstanceState!=null){
             //παίρνουμε από το Bundle το όνομα και την ημερομηνία που έχει δώσει ο χρήστης στα πεδία εισόδου
@@ -56,6 +49,12 @@ public class DataBaseActivity extends MainActivity {
         }
         else{
             //αφού δεν έχει αρχικοποίηση το Bundle σημαίνει ότι τα πεδία εισαγωγής δεδομένων ξεκινάνε με κενό περιεχόμενο άρα φορτώνονται αυτόματα οι έτοιμες τιμές στα πεδία (hints)
+            /*Στη συνέχεια θα πάρουμε την τρέχουσα ημερομηνία και θα την τοποθετήσουμε στο
+        πεδίο εισόδου ημερομηνίας σαν default τιμή. Μπορεί φυσικά ο χρήστης να αλλάξει
+        την τιμή του για να προσθέσει ένα φυτό που φύτευσε παλαιότερα.*/
+            SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+            String date = df.format(Calendar.getInstance().getTime());
+            dateInput.setText(date);
         }
 
     }
@@ -74,18 +73,17 @@ public class DataBaseActivity extends MainActivity {
             if(found==null){
                 Plant plant=new Plant(plantName.getText().toString(),dateInput.getText().toString(),"no fertilizer");
                 dbHandler.addPlant(plant);
-                plantName.setText(" ");
                 Toast.makeText(getApplicationContext(), "Συγχαρητήρια! Το φυτό προστέθηκε επιτυχώς. Καλές σοδειές!", Toast.LENGTH_LONG).show();
             }
             else{
                 Toast.makeText(getApplicationContext(), "Το φυτό υπάρχει ήδη...", Toast.LENGTH_SHORT).show();
-                plantName.setText(" ");
             }
 
         }
         else {
             Toast.makeText(getApplicationContext(), "Παρακαλώ δώστε όνομα στο φυτό σας!", Toast.LENGTH_LONG).show();
         }
+        plantName.setText("");
     }
     /**
      * H μέθοδος onClick για το searchButton.
@@ -98,7 +96,6 @@ public class DataBaseActivity extends MainActivity {
         if(!name.equals("") ){
             Plant found=dbHandler.findPlant(name);
             //εάν υπάρχει στη βάση τότε παίρνουμε τα στοιχεία και θα τα στείλουμε προς εμφάνιση στο ShowPlantFragment διαμέσου της Main Activity
-            plantName.setText(" ");
             if(found!=null){
                 String plantName=String.valueOf(found.getPlantName());
                 String plantDate=String.valueOf(found.getplantingDate());
@@ -112,16 +109,16 @@ public class DataBaseActivity extends MainActivity {
                     textViewInfo.setText("Το φυτό "+plantName+" φυτεύθηκε στις "+plantDate+" και δέχθηκε τελευταία φορά λίπασμα στις "+fertilDate);
                 }
 
-
             }
             else{
                 Toast.makeText(getApplicationContext(), "Το φυτό που αναζητάτε δεν υπάρχει, όμως μπορείτε όποτε θέλετε να φυτέψετε ένα!", Toast.LENGTH_LONG).show();
-                plantName.setText(" ");
+
             }
         }
         else {
             Toast.makeText(getApplicationContext(), "Παρακαλώ εισάγετε το όνομα του φυτού.", Toast.LENGTH_LONG).show();
         }
+        plantName.setText("");
 
     }
     /**
@@ -157,10 +154,8 @@ public class DataBaseActivity extends MainActivity {
                                 if (result) {
                                     //ενημέρωση ότι έγινε επιτυχής διαγραφή του φυτού
                                     Toast.makeText(getApplicationContext(), "Το φυτό ξεριζώθηκε επιτυχώς.", Toast.LENGTH_LONG).show();
-                                    plantName.setText(" ");
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Ανεπιτυχής προσπάθεια ξεριζώματος...", Toast.LENGTH_LONG).show();
-                                    plantName.setText(" ");
                                 }
 
                             }
@@ -173,14 +168,14 @@ public class DataBaseActivity extends MainActivity {
             }
             else{
                 Toast.makeText(getApplicationContext(), "Δεν υπάρχει το φυτό αυτό στον κήπο σας.", Toast.LENGTH_LONG).show();
-                plantName.setText(" ");
+
             }
         }
         else
         {
             Toast.makeText(getApplicationContext(), "Παρακαλώ εισάγετε το όνομα του φυτού που επιθυμείτε να ξεριζώσετε.", Toast.LENGTH_LONG).show();
         }
-
+        plantName.setText("");
 
     }
 

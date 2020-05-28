@@ -55,6 +55,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i2);
                 return true;
 
+            case R.id.menu_fertil:
+                Intent i3=new Intent(this,FertilizerActivity.class);
+                startActivity(i3);
+                return true;
+
             case R.id.menu_gallery:
                 return true;
 
