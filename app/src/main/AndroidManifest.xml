@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Fertilizer"></activity>
+        <activity android:name=".FertilizerActivity"></activity>
         <activity android:name=".DataBaseActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -1,5 +1,7 @@
 package com.example.plantapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -73,15 +75,16 @@ public class DataBaseActivity extends MainActivity {
                 Plant plant=new Plant(plantName.getText().toString(),dateInput.getText().toString(),"no fertilizer");
                 dbHandler.addPlant(plant);
                 plantName.setText(" ");
-                Toast.makeText(getApplicationContext(), "Συγχαρητήρια! Το φυτό προστέθηκε επιτυχώς. Καλές σοδειές!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Συγχαρητήρια! Το φυτό προστέθηκε επιτυχώς. Καλές σοδειές!", Toast.LENGTH_LONG).show();
             }
             else{
                 Toast.makeText(getApplicationContext(), "Το φυτό υπάρχει ήδη...", Toast.LENGTH_SHORT).show();
+                plantName.setText(" ");
             }
 
         }
         else {
-            Toast.makeText(getApplicationContext(), "Παρακαλώ δώστε όνομα στο φυτό σας!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Παρακαλώ δώστε όνομα στο φυτό σας!", Toast.LENGTH_LONG).show();
         }
     }
     /**
@@ -97,14 +100,13 @@ public class DataBaseActivity extends MainActivity {
             //εάν υπάρχει στη βάση τότε παίρνουμε τα στοιχεία και θα τα στείλουμε προς εμφάνιση στο ShowPlantFragment διαμέσου της Main Activity
             plantName.setText(" ");
             if(found!=null){
-                Toast.makeText(getApplicationContext(), "Το φυτό βρέθηκε στον κήπο!", Toast.LENGTH_SHORT).show();
                 String plantName=String.valueOf(found.getPlantName());
                 String plantDate=String.valueOf(found.getplantingDate());
                 String fertilDate=String.valueOf(found.getFertilDate());
                //εμφάνιση των στοιχείων του φυτού σε ένα textView που by default είναι unvisible.
                 textViewInfo.setVisibility(View.VISIBLE);
                 if(fertilDate.equals("no fertilizer")){
-                    textViewInfo.setText("Το φυτό "+plantName+" φυτεύθηκε στις "+plantDate+" και δεν έχει δεχθεί ακόμη λίπασμα.");
+                    textViewInfo.setText("Το φυτό "+plantName+" φυτεύθηκε στις "+plantDate+" και δεν έχει δεχθεί ακόμη λίπασμα. Μπορείτε να διαχειριστείτε την λίπανση από την ειδική επιλογή του μενού.");
                 }
                 else{
                     textViewInfo.setText("Το φυτό "+plantName+" φυτεύθηκε στις "+plantDate+" και δέχθηκε τελευταία φορά λίπασμα στις "+fertilDate);
@@ -113,11 +115,12 @@ public class DataBaseActivity extends MainActivity {
 
             }
             else{
-                //ενημέρωσε ότι το φυτό δεν υπάρχει
+                Toast.makeText(getApplicationContext(), "Το φυτό που αναζητάτε δεν υπάρχει, όμως μπορείτε όποτε θέλετε να φυτέψετε ένα!", Toast.LENGTH_LONG).show();
+                plantName.setText(" ");
             }
         }
         else {
-            //εμφάνιση μηνύματος ότι δεν μπορεί να δώσει κενή επιλογή
+            Toast.makeText(getApplicationContext(), "Παρακαλώ εισάγετε το όνομα του φυτού.", Toast.LENGTH_LONG).show();
         }
 
     }
@@ -126,25 +129,58 @@ public class DataBaseActivity extends MainActivity {
      */
     public void delPlant(View view){
         textViewInfo.setVisibility(View.INVISIBLE);//το πεδίο στο οποίο θα εμφανιστούν οι πληροφορίες φυτού τίθεται σε αόρατο σε περίπτωση που είναι ορατό
-        MyDBHandler dbHandler=new MyDBHandler(this,null,null,1);//το αντικείμενο για την επικοινωνία με τη βάση δεδομένων
-        String name=plantName.getText().toString();//παίρνουμε το όνομα που έδωσε ο χρήστης
-        //εάν το όνομα δεν είναι κενό, το ψάχνουμε στη βάση δεδομένων μας
-        if(!name.equals("") ){
-            boolean result=dbHandler.deletePlant(name);
-            //εάν δεν υπάρχει στη βάση το προσθέτουμε και επαναφέρουμε το editText στην προηγούμενη κατάσταση, με το placeHolder
-            if(result){
-                //ενημέρωση ότι έγινε επιτυχής διαγραφή του φυτού
-                plantName.setText(" ");
+        final MyDBHandler dbHandler=new MyDBHandler(this,null,null,1);//το αντικείμενο για την επικοινωνία με τη βάση δεδομένων
+        final String name=plantName.getText().toString();//παίρνουμε το όνομα που έδωσε ο χρήστης
+        //εάν το όνομα δεν είναι κενό και υπάρχει στη βάση δεδομένων, τότε εμφανίζεται μήνυμα προειδοποίησης για την επιβεβαίωση του χρήστη
+        if(!name.equals("") ) {
+            Plant found=dbHandler.findPlant(name);//αναζήτηση του φυτού στη βάση δεδομένων
+            if(found!=null) {
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                builder1.setMessage("Σίγουρα θέλετε να ξεριζώσετε το φυτό; ");
+                builder1.setCancelable(true);
+                builder1.setPositiveButton(
+                        "oχι",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                Toast.makeText(getApplicationContext(), "Το ξερίζωμα του φυτού ακυρώθηκε. Ίσως μπορεί να δεχτεί φροντίδα για λίγο ακόμα...", Toast.LENGTH_LONG).show();
+                            }
+                        });
 
+                builder1.setNegativeButton(
+                        "Ναι",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                boolean result = dbHandler.deletePlant(name);
+                                //εάν δεν υπάρχει στη βάση το προσθέτουμε και επαναφέρουμε το editText στην προηγούμενη κατάσταση, με το placeHolder
+                                if (result) {
+                                    //ενημέρωση ότι έγινε επιτυχής διαγραφή του φυτού
+                                    Toast.makeText(getApplicationContext(), "Το φυτό ξεριζώθηκε επιτυχώς.", Toast.LENGTH_LONG).show();
+                                    plantName.setText(" ");
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Ανεπιτυχής προσπάθεια ξεριζώματος...", Toast.LENGTH_LONG).show();
+                                    plantName.setText(" ");
+                                }
+
+                            }
+
+
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
             }
             else{
-                //ενημέρωσε ότι το φυτό δεν υπάρχει
+                Toast.makeText(getApplicationContext(), "Δεν υπάρχει το φυτό αυτό στον κήπο σας.", Toast.LENGTH_LONG).show();
+                plantName.setText(" ");
             }
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "Παρακαλώ εισάγετε το όνομα του φυτού που επιθυμείτε να ξεριζώσετε.", Toast.LENGTH_LONG).show();
+        }
 
-        }
-        else {
-            //εμφάνιση μηνύματος ότι δεν μπορεί να δώσει κενή επιλογή
-        }
 
     }
 

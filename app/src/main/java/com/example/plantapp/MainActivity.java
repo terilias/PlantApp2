@@ -45,20 +45,17 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.menu_home:
-                Toast.makeText(getApplicationContext(), R.string.first_menu, Toast.LENGTH_SHORT).show();
                 Intent i1=new Intent(this,MainActivity.class);
                 startActivity(i1);
                 return true;
 
 
             case R.id.menu_add:
-                Toast.makeText(getApplicationContext(), "Διαχείριση κήπου", Toast.LENGTH_SHORT).show();
                 Intent i2=new Intent(this,DataBaseActivity.class);
                 startActivity(i2);
                 return true;
 
             case R.id.menu_gallery:
-                Toast.makeText(getApplicationContext(), R.string.third_menu, Toast.LENGTH_SHORT).show();
                 return true;
 
             default:

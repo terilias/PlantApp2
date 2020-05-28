@@ -14,8 +14,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
     private static final String TABLE_PLANTS="plants";
     private static final String COLUMN_ID="_id";
     private static final String COLUMN_PLANTNAME="plantName";
-    private static final String COLUMN_PLANTINGDATE="plantingDate";
-    private static final String COLUMN_FERTILDATE="fertilDate";
+    private static final String COLUMN_PLANTINGDATE="plantingDate";//πότε φυτεύθηκε
+    private static final String COLUMN_FERTILDATE="fertilDate";//πότε ήταν η τελευταία φορά που λιπάνθηκε
 
     public MyDBHandler( Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
@@ -104,5 +104,35 @@ public class MyDBHandler extends SQLiteOpenHelper {
         }
         db.close();
         return result;
+    }
+
+    /**
+     * Υλοποιεί την λειουργία update για την τιμή της στήλης COLUMN_FERTILDATE ώστε να κρατάει την τελευταία ημερομηνία λίπανσης.
+     * Η λίπανση γίνεται για ένα συγκεκριμένο φυτό.
+     * @param plant το φυτό που δέχεται το λίπασμα
+     * @param date  η ημερομηνία που δέχθηκε το λίπασμα
+     */
+    public void fertilPlant(Plant plant,String date){
+        ContentValues values=new ContentValues();
+        values.put(COLUMN_PLANTNAME,plant.getPlantName());
+        values.put(COLUMN_PLANTINGDATE,plant.getplantingDate());
+        values.put(COLUMN_FERTILDATE,plant.getFertilDate());
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.update(TABLE_PLANTS,values,COLUMN_ID+" = ?",new String[] {String.valueOf(plant.getId())});
+        db.close();
+
+    }
+
+    /**
+     * Υλοποιεί την λειουργία update για την τιμή της στήλης COLUMN_FERTILDATE ώστε να κρατάει την τελευταία ημερομηνία λίπανσης.
+     * Η λίπανση γίνεται για όλα τα φυτά.
+     * @param date  η ημερομηνία λίπανσης
+     */
+    public void fertilAllPlants(String date){
+        ContentValues values=new ContentValues();
+        values.put(COLUMN_FERTILDATE,date);
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.update(TABLE_PLANTS,values,null,null);
+        db.close();
     }
 }
