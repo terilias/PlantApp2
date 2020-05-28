@@ -124,11 +124,11 @@
 
     <TextView
         android:id="@+id/textViewInfo"
-        android:layout_width="324dp"
-        android:layout_height="75dp"
+        android:layout_width="354dp"
+        android:layout_height="196dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:text="TextView"
         android:visibility="visible"

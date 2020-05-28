@@ -105,8 +105,13 @@ public class FertilizerActivity extends MainActivity {
             Toast.makeText(getApplicationContext(), "Επιτυχής λίπανση του κήπου σας!", Toast.LENGTH_LONG).show();
         }
         else{
-            dbHandler.fertilPlant(editTextFertilName.getText().toString(),editTextFertilDate.getText().toString());
-            Toast.makeText(getApplicationContext(), "Επιτυχής λίπανση φυτού!", Toast.LENGTH_LONG).show();
+            if(!editTextFertilName.getText().toString().equals("")) {
+                dbHandler.fertilPlant(editTextFertilName.getText().toString(), editTextFertilDate.getText().toString());
+                Toast.makeText(getApplicationContext(), "Επιτυχής λίπανση φυτού!", Toast.LENGTH_LONG).show();
+            }
+            else{
+                Toast.makeText(getApplicationContext(), "Παρακαλώ εισάγετε το όνομα του φυτού που επιθυμείτε να λιπάνετε.", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
