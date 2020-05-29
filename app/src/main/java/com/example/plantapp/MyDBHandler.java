@@ -3,6 +3,7 @@ package com.example.plantapp;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -139,5 +140,18 @@ public class MyDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db=this.getWritableDatabase();
         db.update(TABLE_PLANTS,values,null,null);
         db.close();
+    }
+
+    /**
+     * Μέθοδος υπολογισμού αριθμού εγγραφών του πίανακα φυτών της βάσης δεδομένων.
+     * Η μέθοδος αυτή προέρχεται από το: https://stackoverflow.com/questions/18097748/how-to-get-row-count-in-sqlite-using-android
+     * Εξορισμού της η queryNumEntries επιστρέφει long οπότε και η δική μας μέθοδος πρέπει να επιστρέφει long
+     * @return το πλήθος των γραμμών του πίνακα TABLE_PLANTS
+     */
+    public long getPlantsCount() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        long count = DatabaseUtils.queryNumEntries(db, TABLE_PLANTS);
+        db.close();
+        return count;
     }
 }

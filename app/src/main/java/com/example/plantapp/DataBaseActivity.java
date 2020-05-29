@@ -71,17 +71,17 @@ public class DataBaseActivity extends MainActivity {
             Plant found=dbHandler.findPlant(name);
             //εάν δεν υπάρχει στη βάση το προσθέτουμε και κάνουμε το editText να έχει κενό
             if(found==null){
-                Plant plant=new Plant(plantName.getText().toString(),dateInput.getText().toString(),"no fertilizer");
+                Plant plant=new Plant(plantName.getText().toString(),dateInput.getText().toString(),"no fertilizer");//αρχικοποίηση της στήλης ημερομηνίας λιπάσματος είναι no fertilizer
                 dbHandler.addPlant(plant);
-                Toast.makeText(getApplicationContext(), "Συγχαρητήρια! Το φυτό προστέθηκε επιτυχώς. Καλές σοδειές!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.congrats, Toast.LENGTH_LONG).show();
             }
             else{
-                Toast.makeText(getApplicationContext(), "Το φυτό υπάρχει ήδη...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.plantAlready, Toast.LENGTH_LONG).show();
             }
 
         }
         else {
-            Toast.makeText(getApplicationContext(), "Παρακαλώ δώστε όνομα στο φυτό σας!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.pleaseInsertName, Toast.LENGTH_LONG).show();
         }
         plantName.setText("");
     }
@@ -103,6 +103,8 @@ public class DataBaseActivity extends MainActivity {
                //εμφάνιση των στοιχείων του φυτού σε ένα textView που by default είναι unvisible.
                 textViewInfo.setVisibility(View.VISIBLE);
                 if(fertilDate.equals("no fertilizer")){
+                    //για κάποιο λόγο δεν καταφέραμε να κάνουμε setText με μήνυμα από το R.string γιατί εμφανίζει τους αριθμούς του id
+                    // όταν το προσθέτουμε σε υπόλοιπα strings. Οπότε εδώ το μήνυμα είναι hardcoded
                     textViewInfo.setText("Το φυτό "+plantName+" φυτεύθηκε στις "+plantDate+" και δεν έχει δεχθεί ακόμη λίπασμα. Μπορείτε να διαχειριστείτε την λίπανση από την ειδική επιλογή του μενού.");
                 }
                 else{
@@ -111,12 +113,12 @@ public class DataBaseActivity extends MainActivity {
 
             }
             else{
-                Toast.makeText(getApplicationContext(), "Το φυτό που αναζητάτε δεν υπάρχει, όμως μπορείτε όποτε θέλετε να φυτέψετε ένα!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.noPlantFound, Toast.LENGTH_LONG).show();
 
             }
         }
         else {
-            Toast.makeText(getApplicationContext(), "Παρακαλώ εισάγετε το όνομα του φυτού.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.pleaseInsertName, Toast.LENGTH_LONG).show();
         }
         plantName.setText("");
 
@@ -133,19 +135,19 @@ public class DataBaseActivity extends MainActivity {
             Plant found=dbHandler.findPlant(name);//αναζήτηση του φυτού στη βάση δεδομένων
             if(found!=null) {
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-                builder1.setMessage("Σίγουρα θέλετε να ξεριζώσετε το φυτό; ");
+                builder1.setMessage(R.string.confirmMessage);
                 builder1.setCancelable(true);
                 builder1.setPositiveButton(
-                        "oχι",
+                        R.string.no,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
-                                Toast.makeText(getApplicationContext(), "Το ξερίζωμα του φυτού ακυρώθηκε. Ίσως μπορεί να δεχτεί φροντίδα για λίγο ακόμα...", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), R.string.noUnrooting, Toast.LENGTH_LONG).show();
                             }
                         });
 
                 builder1.setNegativeButton(
-                        "Ναι",
+                        R.string.yes,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
@@ -153,9 +155,9 @@ public class DataBaseActivity extends MainActivity {
                                 //εάν δεν υπάρχει στη βάση το προσθέτουμε και επαναφέρουμε το editText στην προηγούμενη κατάσταση, με το placeHolder
                                 if (result) {
                                     //ενημέρωση ότι έγινε επιτυχής διαγραφή του φυτού
-                                    Toast.makeText(getApplicationContext(), "Το φυτό ξεριζώθηκε επιτυχώς.", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), R.string.correctUnrooting, Toast.LENGTH_LONG).show();
                                 } else {
-                                    Toast.makeText(getApplicationContext(), "Ανεπιτυχής προσπάθεια ξεριζώματος...", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), R.string.inCorrectUnrooting, Toast.LENGTH_LONG).show();
                                 }
 
                             }
@@ -167,13 +169,13 @@ public class DataBaseActivity extends MainActivity {
                 alert11.show();
             }
             else{
-                Toast.makeText(getApplicationContext(), "Δεν υπάρχει το φυτό αυτό στον κήπο σας.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.noThisPlantFound, Toast.LENGTH_LONG).show();
 
             }
         }
         else
         {
-            Toast.makeText(getApplicationContext(), "Παρακαλώ εισάγετε το όνομα του φυτού που επιθυμείτε να ξεριζώσετε.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.pleaseInsertName, Toast.LENGTH_LONG).show();
         }
         plantName.setText("");
 

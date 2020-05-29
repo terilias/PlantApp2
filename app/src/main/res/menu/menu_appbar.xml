@@ -19,4 +19,8 @@
         android:id="@+id/menu_gallery"
         android:icon="@drawable/ic_plant"
         android:title="@string/third_menu" />
+    <item
+        android:id="@+id/menu_info"
+        android:icon="@drawable/ic_info"
+        android:title="@string/fourth_menu" />
 </menu>

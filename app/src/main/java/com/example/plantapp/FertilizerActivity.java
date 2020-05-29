@@ -1,7 +1,5 @@
 package com.example.plantapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -102,15 +100,15 @@ public class FertilizerActivity extends MainActivity {
         boolean state=aSwitch.isChecked();//η κατάσταση του switch
         if(state){
             dbHandler.fertilAllPlants(editTextFertilDate.getText().toString());
-            Toast.makeText(getApplicationContext(), "Επιτυχής λίπανση του κήπου σας!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.successFertilGarden, Toast.LENGTH_LONG).show();
         }
         else{
             if(!editTextFertilName.getText().toString().equals("")) {
                 dbHandler.fertilPlant(editTextFertilName.getText().toString(), editTextFertilDate.getText().toString());
-                Toast.makeText(getApplicationContext(), "Επιτυχής λίπανση φυτού!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.successFertilPlant, Toast.LENGTH_LONG).show();
             }
             else{
-                Toast.makeText(getApplicationContext(), "Παρακαλώ εισάγετε το όνομα του φυτού που επιθυμείτε να λιπάνετε.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.pleaseInsertName, Toast.LENGTH_LONG).show();
             }
         }
     }
