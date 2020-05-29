@@ -9,25 +9,26 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="367dp"
-        android:layout_height="77dp"
+        android:layout_width="331dp"
+        android:layout_height="62dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="24dp"
         android:fontFamily="casual"
         android:text="@string/welcomeTitle"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#009688"
-        android:textSize="25sp"
+        android:textSize="22sp"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.471"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="312dp"
-        android:layout_height="326dp"
+        android:layout_width="284dp"
+        android:layout_height="304dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
@@ -40,9 +41,9 @@
 
     <TextView
         android:id="@+id/textViewHowMany"
-        android:layout_width="361dp"
-        android:layout_height="281dp"
-        android:layout_marginStart="32dp"
+        android:layout_width="312dp"
+        android:layout_height="204dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="40dp"
