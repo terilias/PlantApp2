@@ -99,10 +99,12 @@ public class FertilizerActivity extends MainActivity {
         MyDBHandler dbHandler=new MyDBHandler(this,null,null,1);//το αντικείμενο για την επικοινωνία με τη βάση δεδομένων
         boolean state=aSwitch.isChecked();//η κατάσταση του switch
         if(state){
+            //εάν βρισκόμαστε σε mode μαζικού λιπάσματος καλείται η μέθοδος fertilAllPlants από την myDBHandler
             dbHandler.fertilAllPlants(editTextFertilDate.getText().toString());
             Toast.makeText(getApplicationContext(), R.string.successFertilGarden, Toast.LENGTH_LONG).show();
         }
         else{
+            //εάν βρισκόμαστε σε mode λιπάσματος συγκεκριμένου φυτού καλείται η μέθοδος fertilPlant από την myDBHandler
             if(!editTextFertilName.getText().toString().equals("")) {
                 dbHandler.fertilPlant(editTextFertilName.getText().toString(), editTextFertilDate.getText().toString());
                 Toast.makeText(getApplicationContext(), R.string.successFertilPlant, Toast.LENGTH_LONG).show();

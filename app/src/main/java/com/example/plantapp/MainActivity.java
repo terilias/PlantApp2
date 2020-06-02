@@ -17,6 +17,9 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
     TextView howMany;
     @Override
+    /**
+     * Η onCreate της MainActivity εμφανίζει μήνυμα με το πλήθος των εγγραφών του χρήστη στον πίνακα της βάσης δεδομένων.
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
