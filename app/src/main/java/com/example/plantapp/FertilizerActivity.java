@@ -106,8 +106,18 @@ public class FertilizerActivity extends MainActivity {
         else{
             //εάν βρισκόμαστε σε mode λιπάσματος συγκεκριμένου φυτού καλείται η μέθοδος fertilPlant από την myDBHandler
             if(!editTextFertilName.getText().toString().equals("")) {
-                dbHandler.fertilPlant(editTextFertilName.getText().toString(), editTextFertilDate.getText().toString());
-                Toast.makeText(getApplicationContext(), R.string.successFertilPlant, Toast.LENGTH_LONG).show();
+                //πρώτα αναζήτηση του φυτού στη βάση δεδομένων
+                Plant found=dbHandler.findPlant(editTextFertilName.getText().toString());
+                if(found==null){
+                    //εάν το φυτό δεν υπάρχει, εμφανίζεται σχετικό μήνυμα
+                    Toast.makeText(getApplicationContext(), R.string.noPlantFound, Toast.LENGTH_LONG).show();
+                    editTextFertilName.setText("");
+                }
+                else {
+                    dbHandler.fertilPlant(editTextFertilName.getText().toString(), editTextFertilDate.getText().toString());
+                    Toast.makeText(getApplicationContext(), R.string.successFertilPlant, Toast.LENGTH_LONG).show();
+                    editTextFertilName.setText("");
+                }
             }
             else{
                 Toast.makeText(getApplicationContext(), R.string.pleaseInsertName, Toast.LENGTH_LONG).show();

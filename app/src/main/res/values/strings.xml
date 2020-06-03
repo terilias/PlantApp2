@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">PlantApp</string>
     <string name="first_placeholder">Αρχική Οθόνη</string>
-    <string name="second_placeholder">Here user will add a plant to database.</string>
-    <string name="third_placeholder">Here user will show hes plants with cardView.</string>
     <string name="first_menu">Αρχική</string>
     <string name="second_menu">Διαχείριση κήπου</string>
     <string name="third_menu">Gallery</string>
@@ -13,7 +11,6 @@
     <string name="buttonSearch">Βρες</string>
     <string name="buttonAdd">Φυτεψε</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="plantingDate">Φυτεύθηκε στις:</string>
     <string name="FertilDate">Την τελευταία φορά που λιπάνθηκε ήταν:</string>
@@ -22,20 +19,20 @@
     <string name="plantInfo">Πληροφορίες Φυτού</string>
     <string name="gardenManagementTitle">Διαχειριστείτε τον κήπο σας  εδώ!</string>
     <string name="fertilTitle">Ρίξτε λίπασμα!</string>
-    <string name="fertilInfo">Από εδώ μπορείτε να σημειώσετε την τελευταία λίπανση που πραγματοποιήσατε. Τα παραγωγικά φυτά (π.χ. τα λαχανικά) χρειάζονται λίπασμα κάθε 15 μέρες περίπου αλλά μπορείτε να αποφασίσετε εσείς την συχνότητα λίπανσης σύμφωνα με τις ανάγκες των φυτών σας.</string>
+    <string name="fertilInfo">Από εδώ μπορείτε να καταγράψετε την τελευταία λίπανση που πραγματοποιήσατε.</string>
     <string name="menu_fertil">Λίπανση</string>
     <string name="fertilPlant">Λίπανση σε συγκεκριμένο φυτό</string>
     <string name="fertilGarden">Μαζική λίπανση:</string>
     <string name="change">Αλλαγή</string>
     <string name="fertilDate">Ημερομηνία λίπανσης:</string>
-    <string name="textViewFertilStatus1">Αυτή τη στιγμή είναι ενεργή η λίπανση για όλα τα φυτά. Δώστε ημερομηνία λίπανσης. Για λίπανση συγκεκριμένου φυτού αλλάξτε την κατάσταση του διακόπτη.</string>
-    <string name="textViewFertilStatus2">Έχετε επιλέξει λίπανση για ένα συγκεκριμένο φυτό. Δώστε το όνομα του φυτού αυτού και την ημερομηνία λίπανσης. Αλλάξτε τον διακόπτη αν επιθυμείτε μαζική λίπανση.</string>
+    <string name="textViewFertilStatus1">Αυτή τη στιγμή είναι ενεργή η λίπανση για όλα τα φυτά.</string>
+    <string name="textViewFertilStatus2">Έχετε επιλέξει λίπανση για ένα συγκεκριμένο φυτό.</string>
     <string name="fertilButton">λιπανση</string>
-    <string name="welcomeTitle">Καλωσήρθατε στο PlantApp!</string>
+    <string name="welcomeTitle">  Καλωσήρθατε στο PlantApp!</string>
     <string name="textviewName">TextView</string>
     <string name="switschText">" "</string>
     <string name="aboutTitle">Οδηγίες και πληροφορίες</string>
-    <string name="welcomeText">"Με την εφαρμογή PlantApp μπορείτε να αποθηκεύετε τα στοιχεία των φυτών του κήπου ή του μπαλκονιού σας εύκολα και γρήγορα:\ \n \ \n •Για να προσθέσετε ένα φυτό στον εικονικό σας κήπο επισκεφθείτε το μενού "Διαχείριση Κήπου". \ \n \ \n•Το PlantApp επίσης θα σας βοηθήσει να διαχειριστείτε την λίπανση καλύτερα! Από το μενού "Λίπανση" μπορείτε να δηλώσετε πότε ήταν η τελευταία φορά που λιπάνατε τα φυτά σας. Μπορείτε να πραγματοποιήσετε λίπανση με μαζικό τρόπο για όλα τα φυτά ή μεμονομένα για κάποιο συγκεκριμένο.\ \n \ \nΗ ανάπτυξη της εφαρμογής έγινε στο πλαίσιο του μαθήματος Ανάπτυξη Εφαρμογών Κινητών Συσκευών του τμήματος Πληροφορικής Α.Π.Θ. με επιβλέποντα καθηγητή τον κ.Κατσάνο Χρήστο. \ \n •To εικονίδιο της εφαρμογής προέρχεται από τον λογαριασμό "Freepik" και το <a href="https://www.flaticon.com/">www.flaticon.com</a>\ \n
+    <string name="welcomeText"> •Για να προσθέσετε ένα φυτό στον εικονικό σας κήπο επισκεφθείτε το μενού Διαχείριση Κήπου. \ \n •Το PlantApp επίσης θα σας βοηθήσει να διαχειριστείτε την λίπανση καλύτερα! Από το μενού Λίπανση μπορείτε να δηλώσετε πότε ήταν η τελευταία φορά που λιπάνατε τα φυτά σας. \ \n •Η εφαρμογή αυτή δημιουργήθηκε στο πλαίσιο του μαθήματος Ανάπτυξη Εφαρμογών Κινητών Συσκευών του τμήματος Πληροφορικής Α.Π.Θ. με επιβλέποντα καθηγητή τον κ.Κατσάνο Χήστο . \ \n •To εικονίδιο της εφαρμογής προέρχεται από τον λογαριασμό "Freepik" και το <a href="https://www.flaticon.com/">www.flaticon.com</a>\ \n
 •Η εικόνα της αρχικής οθόνης προέρχεται από το <a href="https://www.flaticon.com/">www.freesvg.org</a> και αποτελεί public domain (κοινό κτήμα). \ \n •Ως εικονίδιο για την εφαρμογή έχει επιλεγεί η τοματιά, καθώς αποτελεί για πολλούς σύμβολο της σπιτικής καλλιέργειας λαχανικών και δεν λείπει από κανέναν καλοκαιρινό κήπο.</string>
     <string name="noPlantFound">Το φυτό που αναζητάτε δεν υπάρχει, όμως μπορείτε όποτε θέλετε να φυτέψετε ένα!</string>
     <string name="pleaseInsertName">Παρακαλώ εισάγετε το όνομα του φυτού.</string>
@@ -52,6 +49,6 @@
     <string name="successFertilPlant">Επιτυχής λίπανση φυτού!</string>
     <string name="imageTitle">A tomato plant.</string>
     <string name="howManyPlants">Αυτή τη στιγμή έχετε στον κήπο σας: </string>
-    <string name="noPlants">Αυτή τη στιγμή δεν έχετε κανένα φυτό στον κήπο σας. Επισκεφθείτε από το μενού την επιλογή διαχείρισης κήπου για να ξεκινήσετε!</string>
-    <string name="onePlant">Έχετε φυτέψει επιτυχώς το πρώτο σας φυτό! Μην ξεχνάτε ότι θα χρειαστεί και λίπασμα. Επισκεφθείτε απο το μενού την επιλογή Λίπανση για να δείτε πως θα διαχειρίζεστε την λίπανση με το PlantApp!</string>
+    <string name="noPlants">Αυτή τη στιγμή δεν έχετε κανένα φυτό στον κήπο σας. Πηγαίνετε στη διαχείριση κήπου για να ξεκινήσετε!</string>
+    <string name="onePlant">Έχετε φυτέψει επιτυχώς το πρώτο σας φυτό!</string>
 </resources>

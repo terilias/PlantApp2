@@ -8,17 +8,18 @@
 
     <EditText
         android:id="@+id/editTextFertilName"
-        android:layout_width="217dp"
-        android:layout_height="40dp"
+        android:layout_width="207dp"
+        android:layout_height="39dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:ems="4"
         android:hint="@string/editTextPlantName"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:labelFor="@id/textView5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintHorizontal_bias="0.18"
         app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/editTextFertilDate" />
 
@@ -27,25 +28,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="24dp"
         android:text="@string/textViewPlantName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewFertilDate" />
 
     <TextView
-        android:id="@+id/textViewFertilDate"
-        android:layout_width="145dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="48dp"
-        android:text="@string/fertilDate"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFertilStatus" />
-
-    <TextView
         android:id="@+id/textViewInformFertil"
-        android:layout_width="353dp"
-        android:layout_height="170dp"
+        android:layout_width="311dp"
+        android:layout_height="44dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
@@ -56,19 +47,22 @@
 
     <TextView
         android:id="@+id/textViewFertilStatus"
-        android:layout_width="308dp"
-        android:layout_height="79dp"
-        android:layout_marginStart="24dp"
+        android:layout_width="341dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/textViewFertilStatus1"
         android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewAllPlants" />
 
     <TextView
         android:id="@+id/textViewAllPlants"
-        android:layout_width="234dp"
-        android:layout_height="22dp"
+        android:layout_width="260dp"
+        android:layout_height="21dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:text="@string/fertilGarden"
@@ -81,8 +75,11 @@
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:checked="true"
         android:text="@string/switschText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textViewAllPlants"
         app:layout_constraintTop_toBottomOf="@+id/textViewInformFertil" />
 
@@ -91,8 +88,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="8dp"
         android:onClick="fertilize"
         android:text="@string/fertilButton"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -107,14 +104,25 @@
         android:layout_width="159dp"
         android:layout_height="44dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
         android:importantForAutofill="no"
         android:inputType="date"
         android:labelFor="@id/textViewFertilDate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.546"
+        app:layout_constraintHorizontal_bias="0.16"
         app:layout_constraintStart_toEndOf="@+id/textViewFertilDate"
+        app:layout_constraintTop_toBottomOf="@+id/textViewFertilStatus" />
+
+    <TextView
+        android:id="@+id/textViewFertilDate"
+        android:layout_width="145dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/fertilDate"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewFertilStatus" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

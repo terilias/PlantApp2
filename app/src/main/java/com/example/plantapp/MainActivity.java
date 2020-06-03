@@ -2,13 +2,11 @@ package com.example.plantapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Η κύρια δραστηριότητα περιλαμβάνει το μενού και διαχειρίζεται την αλληλεπίδραση του χρήστη με αυτό. Την επεκτείνουν όλες οι υπόλοιπες δραστηριότητες που
@@ -36,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         else if (numOfPlants<10) {
                 //για κάποιο λόγο δεν καταφέραμε να κάνουμε setText με μήνυμα από το R.string γιατί εμφανίζει τους αριθμούς του id
                 // όταν το προσθέτουμε σε υπόλοιπα strings. Οπότε εδώ το μήνυμα είναι hardcoded
-                howMany.setText("Έχετε φυτέψει επιτυχώς " + numOfPlants + " φυτά στον κήπο σας! Συγχαρητήρια! Συνεχίστε έτσι, η κηπουρική εκτός από το να μας δίνει την δυνατότητα να παράγουμε την δική μας τροφή, έχει αποδειχθεί ότι μας βοηθάει στην αντιμετώπιση του άγχους!");
+                howMany.setText("Έχετε φυτέψει επιτυχώς " + numOfPlants + " φυτά στον κήπο σας! Συγχαρητήρια! Συνεχίστε έτσι!");
         }
         else{
             howMany.setText("Αυτή τη στιγμή έχετε "+numOfPlants+" φυτά στον κήπο σας.");

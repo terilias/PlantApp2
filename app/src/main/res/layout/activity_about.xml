@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/textViewAboutTitle"
-        android:layout_width="349dp"
-        android:layout_height="72dp"
+        android:layout_width="260dp"
+        android:layout_height="27dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
@@ -24,18 +24,19 @@
 
     <TextView
         android:id="@+id/textViewWelcome"
-        android:layout_width="342dp"
-        android:layout_height="541dp"
+        android:layout_width="337dp"
+        android:layout_height="221dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginRight="24dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="24dp"
+        android:scrollbars="vertical"
         android:text="@string/welcomeText"
         android:textColor="#040303"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.437"
+        app:layout_constraintHorizontal_bias="0.53"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewAboutTitle"
-        app:layout_constraintVertical_bias="0.345" />
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

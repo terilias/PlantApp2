@@ -3,6 +3,7 @@ package com.example.plantapp;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,12 +41,16 @@ public class DataBaseActivity extends MainActivity {
         getSupportActionBar().setTitle(R.string.second_menu);
         //ανάκτηση δεδομένων εισόδου για την περίπτωση αλλαγής κατάστασης της συσκευής (π.χ.rotate)
         if (savedInstanceState!=null){
-            //παίρνουμε από το Bundle το όνομα και την ημερομηνία που έχει δώσει ο χρήστης στα πεδία εισόδου
+            //παίρνουμε από το Bundle το όνομα και την ημερομηνία που έχει δώσει ο χρήστης στα πεδία εισόδου, καθώς και τις πληροφορίες που έχουν εμφανιστεί στο textViewInfo
             CharSequence name=savedInstanceState.getCharSequence("plant's name");
             CharSequence pdate=savedInstanceState.getCharSequence("plant's date");
-            //αλλάζουμε το πεδίο κειμένου για να περιέχει το όνομα και την ημερομηνία που είχε τοποθετήσει ο χρήστης πριν από την αλλαγή κατάστασης της συσκευής
+            CharSequence info=savedInstanceState.getCharSequence("plant's info");
+            //αλλάζουμε το πεδίο κειμένου για να περιέχει το όνομα και την ημερομηνία που είχε τοποθετήσει ο χρήστης πριν από την αλλαγή κατάστασης της συσκευής καθώς και τις πληροφορίες που έχουν εμφανιστεί στο textViewInfo
             plantName.setText(name);
             dateInput.setText(pdate);
+            textViewInfo.setText(info);
+            textViewInfo.setVisibility(View.VISIBLE);
+            textViewInfo.setMovementMethod(new ScrollingMovementMethod());//μέθοδος για να μπορεί το textView να είναι scrollable
         }
         else{
             //αφού δεν έχει αρχικοποίηση το Bundle σημαίνει ότι τα πεδία εισαγωγής δεδομένων ξεκινάνε με κενό περιεχόμενο άρα φορτώνονται αυτόματα οι έτοιμες τιμές στα πεδία (hints)
@@ -105,7 +110,7 @@ public class DataBaseActivity extends MainActivity {
                 if(fertilDate.equals("no fertilizer")){
                     //για κάποιο λόγο δεν καταφέραμε να κάνουμε setText με μήνυμα από το R.string γιατί εμφανίζει τους αριθμούς του id
                     // όταν το προσθέτουμε σε υπόλοιπα strings. Οπότε εδώ το μήνυμα είναι hardcoded
-                    textViewInfo.setText("Το φυτό "+plantName+" φυτεύθηκε στις "+plantDate+" και δεν έχει δεχθεί ακόμη λίπασμα. Μπορείτε να διαχειριστείτε την λίπανση από την ειδική επιλογή του μενού.");
+                    textViewInfo.setText("Το φυτό "+plantName+" φυτεύθηκε στις "+plantDate+" και δεν έχει δεχθεί ακόμη λίπασμα. ");
                 }
                 else{
                     textViewInfo.setText("Το φυτό "+plantName+" φυτεύθηκε στις "+plantDate+" και δέχθηκε τελευταία φορά λίπασμα στις "+fertilDate);
@@ -184,12 +189,12 @@ public class DataBaseActivity extends MainActivity {
     @Override
     public void onSaveInstanceState(Bundle outState){
         super.onSaveInstanceState(outState);
-        //σώζω στο Bundle object το περιεχόμενο του πεδίου εισαγωγής κειμένου για το όνομα του φυτού
+        //σώζω στο Bundle object το περιεχόμενο του πεδίου εισαγωγής κειμένου για το όνομα του φυτού, την ημερομηνία και τις πληροφορίες (αν αυτές έχουν εμφανιστεί) στο textVewInfo
         CharSequence name=plantName.getText();
         outState.putCharSequence("plant's name",name);
         CharSequence pdate=plantName.getText();
         outState.putCharSequence("plant's date",pdate);
-
+        outState.putCharSequence("plant's info",textViewInfo.getText());
     }
     /**
      * H μέθοδος αυτή εκτελείται για την τροποποίηση του μενού κατά το χρόνο εκτέλεσης της Activity.

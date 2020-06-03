@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -16,6 +17,9 @@ public class AboutActivity extends MainActivity {
         setContentView(R.layout.activity_about);
         welcomeText=findViewById(R.id.textViewWelcome);
         welcomeText.setMovementMethod(LinkMovementMethod.getInstance());//μέθοδος για να δουλεύουν οι σύνδεσμοι του textView
+        welcomeText.setMovementMethod(new ScrollingMovementMethod());/*μέθοδος για να μπορεί το textView να είναι scrollable. Μπορεί σε Portrait View να χωράει ακόμη περισσότερο κείμενο, αλλά σε Landscape υπάρχει
+        πρόβλημα και το κείμενο κόβεται. Γιαυτό τον λόγο αναζητήσαμε στο διαδίκτυο και εντοπίσαμε ότι προσθέτοντας στο xml του textView την ιδιότητα android:scrollbars="vertical"
+        και εφαρμόζωντας εδώ αυτή τη μέθοδο, μπορούμε να κάνουμε scrollable το κείμενο ώστε να εμφανίζεται χωρίς πρόβλημα.*/
     }
 
     /**
