@@ -82,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.menu_gallery:
+                Intent i4=new Intent(this,GalleryActivity.class);
+                startActivity(i4);
                 return true;
 
             case R.id.menu_info:

@@ -7,6 +7,9 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MyDBHandler extends SQLiteOpenHelper {
     //σταθερές για τα SQL queries
@@ -14,9 +17,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME="plantDB.db";
     private static final String TABLE_PLANTS="plants";
     private static final String COLUMN_ID="_id";
-    private static final String COLUMN_PLANTNAME="plantName";
-    private static final String COLUMN_PLANTINGDATE="plantingDate";//πότε φυτεύθηκε
-    private static final String COLUMN_FERTILDATE="fertilDate";//πότε ήταν η τελευταία φορά που λιπάνθηκε
+    public static final String COLUMN_PLANTNAME="plantName";
+    public static final String COLUMN_PLANTINGDATE="plantingDate";//πότε φυτεύθηκε
+    public static final String COLUMN_FERTILDATE="fertilDate";//πότε ήταν η τελευταία φορά που λιπάνθηκε
 
     public MyDBHandler( Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
@@ -153,5 +156,62 @@ public class MyDBHandler extends SQLiteOpenHelper {
         long count = DatabaseUtils.queryNumEntries(db, TABLE_PLANTS);
         db.close();
         return count;
+    }
+
+    /**
+     * Μέθοδος επιστροφής αντικειμένου Cursor για εμφάνιση όλων των γραμμών του πίνακα TABLE_PLANTS της βάσης
+     * στο RecycleView.
+     * @return Cursor με το περιεχόμενο των γραμμών του πίνακα TABLE_PLANTS
+     */
+    public Cursor getAllItems() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.query(
+                TABLE_PLANTS,
+                null,
+                null,
+                null,
+                null,
+                null,
+                COLUMN_PLANTNAME + " DESC"
+        );
+    }
+
+    /**
+     *
+     * Μέθοδος για την επιστροφή του περιεχομένου του πίνακα με τα φυτά της βάσης σε Arraylist.
+     * @return όλο το περιεχόμενο του πίνακα της βάσης σε ένα ArrayList που περιέχει αντικείμενα τύπου Plants
+     */
+    public List<Plant> getPlants(){
+        List<Plant> plants=new ArrayList<>();//το Arraylist που θα επιστρέψουμε
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query  = "SELECT * FROM "+TABLE_PLANTS;
+        Cursor cursor=db.rawQuery(query,null);
+//        Plant plant=new Plant();
+//        while (cursor.moveToNext()){
+//            plant.setId(Integer.parseInt(cursor.getString(0)));
+//            plant.setPlantName(cursor.getString(1));
+//            plant.setplantingDate(cursor.getString(2));
+//            plant.setFertilDate(cursor.getString(3));
+//            plants.add(plant);
+//        }
+//        cursor.close();
+//        db.close();
+//        return plants;
+
+            if (cursor.moveToFirst()) {
+                do {
+                    Plant plant = new Plant();
+                    plant.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_ID))));
+                    plant.setPlantName(cursor.getString(cursor.getColumnIndex(COLUMN_PLANTNAME)));
+                    plant.setplantingDate(cursor.getString(cursor.getColumnIndex(COLUMN_PLANTINGDATE)));
+                    plant.setFertilDate(cursor.getString(cursor.getColumnIndex(COLUMN_FERTILDATE)));
+                    plants.add(plant);
+                } while (cursor.moveToNext());
+
+                cursor.close();
+            }
+
+        return plants;
+
     }
 }

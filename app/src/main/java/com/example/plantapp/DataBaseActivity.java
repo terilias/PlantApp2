@@ -76,7 +76,7 @@ public class DataBaseActivity extends MainActivity {
             Plant found=dbHandler.findPlant(name);
             //εάν δεν υπάρχει στη βάση το προσθέτουμε και κάνουμε το editText να έχει κενό
             if(found==null){
-                Plant plant=new Plant(plantName.getText().toString(),dateInput.getText().toString(),"no fertilizer");//αρχικοποίηση της στήλης ημερομηνίας λιπάσματος είναι no fertilizer
+                Plant plant=new Plant(plantName.getText().toString(),dateInput.getText().toString(),"Δεν έχει δεχθεί λίπανση.");//αρχικοποίηση της στήλης ημερομηνίας λιπάσματος είναι no fertilizer
                 dbHandler.addPlant(plant);
                 Toast.makeText(getApplicationContext(), R.string.congrats, Toast.LENGTH_LONG).show();
             }
