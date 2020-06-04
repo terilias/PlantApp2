@@ -15,7 +15,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     TextView howMany;
     @Override
-    /**
+     /**
      * Η onCreate της MainActivity εμφανίζει μήνυμα με το πλήθος των εγγραφών του χρήστη στον πίνακα της βάσης δεδομένων.
      */
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +32,7 @@ public class MainActivity extends AppCompatActivity {
             howMany.setText(R.string.onePlant);
         }
         else if (numOfPlants<10) {
-                //για κάποιο λόγο δεν καταφέραμε να κάνουμε setText με μήνυμα από το R.string γιατί εμφανίζει τους αριθμούς του id
-                // όταν το προσθέτουμε σε υπόλοιπα strings. Οπότε εδώ το μήνυμα είναι hardcoded
+                //για κάποιο λόγο δεν καταφέραμε να κάνουμε setText με μήνυμα από το R.string γιατί εμφανίζει τους αριθμούς του id όταν το προσθέτουμε σε υπόλοιπα strings. Οπότε εδώ το μήνυμα είναι hardcoded
                 howMany.setText("Έχετε φυτέψει επιτυχώς " + numOfPlants + " φυτά στον κήπο σας! Συγχαρητήρια! Συνεχίστε έτσι!");
         }
         else{
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Η μέθοδος αυτή διαχειρίζεται τα clicks του χρήστη στις επιλογές του μενού.
-     * Ανάλογα με την επιλογή του, εκτελεί και διαφορετικό block κώδικα (π.χ. ανοίγει νέα δραστηριότητα της εφαρμογής με explicit intent)
+     * Ανάλογα με την επιλογή του, εκτελεί και διαφορετικό block κώδικα (ανοίγει νέα δραστηριότητα της εφαρμογής με explicit intent)
      * @param item η επιλογή του χρήστη
      * @return true
      */

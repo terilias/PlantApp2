@@ -10,20 +10,19 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
- * Αυτή η δραστηριότητα αναλαμβάνει να παρέχει στον χρήστη την δυνατότητα να δηλώνει ότι ρίχνει λίπσμα στα φυτά του.
+ * Αυτή η δραστηριότητα αναλαμβάνει να παρέχει στον χρήστη την δυνατότητα να δηλώνει ότι ρίχνει λίπασμα στα φυτά του.
  * Αυτή η δυνατότητα της εφαρμογής είναι σημαντική γιατί με αυτό τον τρόπο ο χρήστης μπορεί να υπολογίζει και να διαχειρίζεται την λίπανση των φυτών του κήπου του.
  */
 public class FertilizerActivity extends MainActivity {
     //δήλωση των αντικειμένων του layout που θα χρησιμοποιηθούν για την προσθήκη λειτουργικότητας της εφαρμογής.
-    EditText editTextFertilDate,editTextFertilName;
-    TextView textViewFertilStatus,textViewPlantName;
-    Button buttonFertil;
-    Switch aSwitch;
+    private EditText editTextFertilDate,editTextFertilName;
+    private TextView textViewFertilStatus,textViewPlantName;
+    private Button buttonFertil;
+    private Switch aSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +104,8 @@ public class FertilizerActivity extends MainActivity {
         }
         else{
             //εάν βρισκόμαστε σε mode λιπάσματος συγκεκριμένου φυτού καλείται η μέθοδος fertilPlant από την myDBHandler
-            if(!editTextFertilName.getText().toString().equals("")) {
+            //δεν ξεχνώ να περάσω την είσοδο του χρήστη από το "κόσκινο" της μεθόδου trim γιατί έχω εξασφαλίσει με την χρήση της ίδιας μεθόδου, ότι δεν θα μπει στη βάση φυτό με κενά πριν και μετά την ονομασία του
+            if(!editTextFertilName.getText().toString().trim().equals("")) {
                 //πρώτα αναζήτηση του φυτού στη βάση δεδομένων
                 Plant found=dbHandler.findPlant(editTextFertilName.getText().toString());
                 if(found==null){
@@ -114,12 +114,14 @@ public class FertilizerActivity extends MainActivity {
                     editTextFertilName.setText("");
                 }
                 else {
+                    //εάν το φυτό υπάρχει, το λιπαίνουμε καλώντας την αντίστοιχη μέθοο ενημέρωσης της βάσης
                     dbHandler.fertilPlant(editTextFertilName.getText().toString(), editTextFertilDate.getText().toString());
                     Toast.makeText(getApplicationContext(), R.string.successFertilPlant, Toast.LENGTH_LONG).show();
                     editTextFertilName.setText("");
                 }
             }
             else{
+                //εμφάνιση μηνύματος στην περίπτωση που δεν έχει εισαχθεί ονομασία
                 Toast.makeText(getApplicationContext(), R.string.pleaseInsertName, Toast.LENGTH_LONG).show();
             }
         }

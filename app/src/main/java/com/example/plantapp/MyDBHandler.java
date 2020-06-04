@@ -6,18 +6,21 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Η κλάση αυτή είναι απαραίτητη για την αποθήκευση των δεδομένων των φυτών σε μια βάση δεδομένων.
+ * Ουσιαστικά σύμφωνα με το μοντέλο MVC αυτή εδώ η κλάση είναι ο Controller.
+ */
 public class MyDBHandler extends SQLiteOpenHelper {
+
     //σταθερές για τα SQL queries
     private static final int DATABASE_VERSION=2;
     private static final String DATABASE_NAME="plantDB.db";
     private static final String TABLE_PLANTS="plants";
-    private static final String COLUMN_ID="_id";
-    public static final String COLUMN_PLANTNAME="plantName";
+    private static final String COLUMN_ID="_id";//id φυτού
+    public static final String COLUMN_PLANTNAME="plantName";//όνομα φυτού
     public static final String COLUMN_PLANTINGDATE="plantingDate";//πότε φυτεύθηκε
     public static final String COLUMN_FERTILDATE="fertilDate";//πότε ήταν η τελευταία φορά που λιπάνθηκε
 
@@ -90,8 +93,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     /**
      * Mέθοδος για διαγραφή φυτού βάσει της ονομασίας του.
-     * @param plantName
-     * @return
+     * @param plantName το όνομα του φυτού
+     * @return true εάν γίνει επιτυχής διαγραφή φυτού
      */
     public boolean deletePlant(String plantName){
         boolean result=false;
@@ -158,23 +161,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return count;
     }
 
-    /**
-     * Μέθοδος επιστροφής αντικειμένου Cursor για εμφάνιση όλων των γραμμών του πίνακα TABLE_PLANTS της βάσης
-     * στο RecycleView.
-     * @return Cursor με το περιεχόμενο των γραμμών του πίνακα TABLE_PLANTS
-     */
-    public Cursor getAllItems() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        return db.query(
-                TABLE_PLANTS,
-                null,
-                null,
-                null,
-                null,
-                null,
-                COLUMN_PLANTNAME + " DESC"
-        );
-    }
 
     /**
      *
@@ -186,18 +172,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         String query  = "SELECT * FROM "+TABLE_PLANTS;
         Cursor cursor=db.rawQuery(query,null);
-//        Plant plant=new Plant();
-//        while (cursor.moveToNext()){
-//            plant.setId(Integer.parseInt(cursor.getString(0)));
-//            plant.setPlantName(cursor.getString(1));
-//            plant.setplantingDate(cursor.getString(2));
-//            plant.setFertilDate(cursor.getString(3));
-//            plants.add(plant);
-//        }
-//        cursor.close();
-//        db.close();
-//        return plants;
-
             if (cursor.moveToFirst()) {
                 do {
                     Plant plant = new Plant();

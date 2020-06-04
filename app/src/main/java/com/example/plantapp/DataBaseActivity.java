@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -20,10 +19,11 @@ import java.util.Calendar;
  * να υλοποιήσει τις λειτουργίες δημιουργίας, ανάγνωσης και διαγραφής από τη βάση .
  */
 public class DataBaseActivity extends MainActivity {
-    //δήλωση των αντικειμένων του layout που θα χρησιμοποιηθούν για την προσθήκη λειτουργικότητας της εφαρμογής.
-    EditText plantName,dateInput;
-    TextView textViewInfo;
-    Button buttonAdd,buttonSearch,buttonDel;
+
+    //δήλωση των αντικειμένων του layout που θα χρησιμοποιηθούν για την προσθήκη λειτουργικότητας της δραστηριότητας.
+    private EditText plantName,dateInput;
+    private TextView textViewInfo;
+    private Button buttonAdd,buttonSearch,buttonDel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +50,13 @@ public class DataBaseActivity extends MainActivity {
             dateInput.setText(pdate);
             textViewInfo.setText(info);
             textViewInfo.setVisibility(View.VISIBLE);
-            textViewInfo.setMovementMethod(new ScrollingMovementMethod());//μέθοδος για να μπορεί το textView να είναι scrollable
+            textViewInfo.setMovementMethod(new ScrollingMovementMethod());//μέθοδος για να μπορεί το textView να είναι scrollable (ίσως χρειαστεί ώστε να μπορεί να εμφανίζεται και σε Landscape mode)
         }
         else{
             //αφού δεν έχει αρχικοποίηση το Bundle σημαίνει ότι τα πεδία εισαγωγής δεδομένων ξεκινάνε με κενό περιεχόμενο άρα φορτώνονται αυτόματα οι έτοιμες τιμές στα πεδία (hints)
             /*Στη συνέχεια θα πάρουμε την τρέχουσα ημερομηνία και θα την τοποθετήσουμε στο
-        πεδίο εισόδου ημερομηνίας σαν default τιμή. Μπορεί φυσικά ο χρήστης να αλλάξει
-        την τιμή του για να προσθέσει ένα φυτό που φύτευσε παλαιότερα.*/
+            πεδίο εισόδου ημερομηνίας σαν default τιμή. Μπορεί φυσικά ο χρήστης να αλλάξει
+            την τιμή του για να προσθέσει ένα φυτό που φύτευσε παλαιότερα.*/
             SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
             String date = df.format(Calendar.getInstance().getTime());
             dateInput.setText(date);
@@ -68,9 +68,10 @@ public class DataBaseActivity extends MainActivity {
      * H μέθοδος onClick για το addButton.
      */
     public void addPlant(View view){
-        textViewInfo.setVisibility(View.INVISIBLE);//το πεδίο στο οποίο θα εμφανιστούν οι πληροφορίες φυτού τίθεται σε αόρατο σε περίπτωση που είναι ορατό
+        textViewInfo.setVisibility(View.INVISIBLE);//το πεδίο στο οποίο θα εμφανιστούν οι πληροφορίες φυτού τίθεται σε αόρατο
         MyDBHandler dbHandler=new MyDBHandler(this,null,null,1);//το αντικείμενο για την επικοινωνία με τη βάση δεδομένων
         String name=plantName.getText().toString();//παίρνουμε το όνομα που έδωσε ο χρήστης
+        name=name.trim();//αφαίρεση των κενών που υπάρχουν πριν και μετά το όνομα ώστε να μην αποθηκευθεί ξεχωριστή εγγραφή για φυτό με το ίδιο όνομα με υπάρχον, αλλά με κενά
         //εάν το όνομα δεν είναι κενό, το ψάχνουμε στη βάση δεδομένων μας
         if(!name.equals("")){
             Plant found=dbHandler.findPlant(name);
@@ -97,6 +98,7 @@ public class DataBaseActivity extends MainActivity {
         textViewInfo.setVisibility(View.INVISIBLE);//το πεδίο στο οποίο θα εμφανιστούν οι πληροφορίες φυτού τίθεται σε αόρατο σε περίπτωση που είναι ορατό
         MyDBHandler dbHandler=new MyDBHandler(this,null,null,1);//το αντικείμενο για την επικοινωνία με τη βάση δεδομένων
         String name=plantName.getText().toString();//παίρνουμε το όνομα που έδωσε ο χρήστης
+        name=name.trim();//αφαίρεση των κενών που υπάρχουν πριν και μετά το όνομα
         //εάν το όνομα δεν είναι κενό, το ψάχνουμε στη βάση δεδομένων μας
         if(!name.equals("") ){
             Plant found=dbHandler.findPlant(name);
@@ -115,18 +117,15 @@ public class DataBaseActivity extends MainActivity {
                 else{
                     textViewInfo.setText("Το φυτό "+plantName+" φυτεύθηκε στις "+plantDate+" και δέχθηκε τελευταία φορά λίπασμα στις "+fertilDate);
                 }
-
             }
             else{
                 Toast.makeText(getApplicationContext(), R.string.noPlantFound, Toast.LENGTH_LONG).show();
-
             }
         }
         else {
             Toast.makeText(getApplicationContext(), R.string.pleaseInsertName, Toast.LENGTH_LONG).show();
         }
         plantName.setText("");
-
     }
     /**
      * H μέθοδος onClick για το delButton.
@@ -134,7 +133,7 @@ public class DataBaseActivity extends MainActivity {
     public void delPlant(View view){
         textViewInfo.setVisibility(View.INVISIBLE);//το πεδίο στο οποίο θα εμφανιστούν οι πληροφορίες φυτού τίθεται σε αόρατο σε περίπτωση που είναι ορατό
         final MyDBHandler dbHandler=new MyDBHandler(this,null,null,1);//το αντικείμενο για την επικοινωνία με τη βάση δεδομένων
-        final String name=plantName.getText().toString();//παίρνουμε το όνομα που έδωσε ο χρήστης
+        final String name=plantName.getText().toString().trim();//παίρνουμε το όνομα που έδωσε ο χρήστης με αφαίρεση των κενών που υπάρχουν πριν και μετά το όνομα
         //εάν το όνομα δεν είναι κενό και υπάρχει στη βάση δεδομένων, τότε εμφανίζεται μήνυμα προειδοποίησης για την επιβεβαίωση του χρήστη
         if(!name.equals("") ) {
             Plant found=dbHandler.findPlant(name);//αναζήτηση του φυτού στη βάση δεδομένων

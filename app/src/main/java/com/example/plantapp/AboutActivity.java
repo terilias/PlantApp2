@@ -1,7 +1,5 @@
 package com.example.plantapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
@@ -9,8 +7,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+/**
+ * Αυτή η δραστηριότητα χρησιμοποιείται για την εμφάνιση πληροφοριών και οδηγιών στον χρήστη για την εφαρομγή.
+ */
 public class AboutActivity extends MainActivity {
-    TextView welcomeText;
+
+    private TextView welcomeText;//;όλο κι όλο το περιεχόμενο αυτής της Activity είναι αυτό το textView για την εμφάνιση των πληροφοριών
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

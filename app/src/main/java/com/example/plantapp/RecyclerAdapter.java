@@ -23,20 +23,29 @@ import static com.example.plantapp.MyDBHandler.COLUMN_PLANTNAME;
  */
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
-    private Context mContext;
-    private List<Plant> mPlants;
-    private LayoutInflater inflater;
+    private Context mContext;//το context της δραστηριότητας GalleryActivity
+    private List<Plant> mPlants;//λίστα με τα φυτά, η οποία θα γεμίσει με τα αντικείμενα της βάσης
+    private LayoutInflater inflater;//LayoutInflater από την δραστηριότητα GalleryActivity
+
+    /**
+     * Ο κατασκευαστής του RecyclerAdapter. Δέχεται ως είσοδο:
+     * @param context το context της "μητέρας" activity
+     * @param plants //λίστα με τα φυτά που υπάρχουν στην βάση δεδομένων
+     */
     public RecyclerAdapter(Context context, List<Plant> plants){
         mContext=context;
         mPlants=plants;
         inflater = LayoutInflater.from(context);
     }
     /**
-     * Το αντικείμενο ViewHolder περιέχει κάθε αντικείμενο προς εμφάνιση από το RecyclerView.Εδώ αναφέρεται στα item για εμφάνιση στην κάρτα (ως Views στο CardLayout).
+     * Το αντικείμενο ViewHolder περιέχει κάθε αντικείμενο προς εμφάνιση στο RecyclerView. Εδώ αναφέρεται στα item για εμφάνιση στην κάρτα (ως Views στο CardLayout).
      */
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView textViewCardName, textViewCardDate,textViewCardFertilDate;//τα view items που υπάρχουν στην κάρτα
+        //τα view items που υπάρχουν στην κάρτα
+        TextView textViewCardName;
+        TextView textViewCardDate;
+        TextView textViewCardFertilDate;
 
 
         /**
@@ -49,16 +58,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             textViewCardName=itemView.findViewById(R.id.textView8);
             textViewCardDate=itemView.findViewById(R.id.textView9);
             textViewCardFertilDate=itemView.findViewById(R.id.textView10);
-            
         }
     }
 
     /**
      * Στην συνέχεια υπάρχουν οι μέθοδοι που απαιτούνται να υλοποιηθούν από την RecyclerView.Adapter
      */
+
     @NonNull
     @Override
-    /**
+     /**
      * Γίνεται  inflate στο ViewHolder με το layout της κάρτας.
      */
     public RecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -75,15 +84,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
      */
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapter.ViewHolder holder, int position) {
-
+        //από κάθε στοιχείο της λίστας με τα φυτά, πέρνουμε τα δεδομένα του φυτού για εμφάνιση στην κάρτα, αφού κάθε κάρτα αντιστοιχεί και σε ένα αντικείμενο Plant
         String name=mPlants.get(position).getPlantName();
         String date=mPlants.get(position).getplantingDate();
         String fertilDate=mPlants.get(position).getFertilDate();
+        //αφού πήραμε τα δεδομένα του φυτού, τα τοποθετοπύμε στα items του viewHolder
         holder.textViewCardName.setText(name);
         holder.textViewCardDate.setText(date);
         holder.textViewCardFertilDate.setText(fertilDate);
     }
 
+    /**
+     * Επιστρέφει τον αριθμό των αντικειμένων Plant στη λίστα.
+     * @return το μέγεθος της λίστας με τα φυτά
+     */
     @Override
     public int getItemCount() {
         return mPlants.size();

@@ -1,11 +1,7 @@
 package com.example.plantapp;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 /**
- * Αυτή η κλάση είναι η Data Model Class, δηλαδή αναπαριστά τα αντικείμενα των φυτών για να αποθηκευθούν στη βάση δεδομένων.
+ * Αυτή η κλάση είναι η Data Model Class, δηλαδή στο μοντέλο σύμφωνα με το μοντέλο MVC, και αναπαριστά τα αντικείμενα των φυτών για να αποθηκευθούν στη βάση δεδομένων.
  */
 public class Plant {
     private int id;//id φυτού

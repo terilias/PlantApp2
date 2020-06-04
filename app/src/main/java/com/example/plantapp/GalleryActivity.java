@@ -19,7 +19,7 @@ public class GalleryActivity extends MainActivity {
     private RecyclerView recyclerView;//το recyclerView που θα εμφανίζει τα περιεχόμενα της βάσης σε αυτήν την activity
     private RecyclerView.LayoutManager layoutManager;//layoutManager για την εμφαιση των καρτών στο recyclerView
     private RecyclerView.Adapter adapter;//το αντικείμενο adapter για την μεταφορά των δεδομένων στο RecyclerView μέσω του ViewHolder
-    private TextView textView;//το πεδίο κειμένου όπου εμφανίζεται το σχετικό μήνυμα εάν δεν υπάρχουν προς το παρόν φυτά.
+    private TextView textView;//το πεδίο κειμένου όπου εμφανίζεται το σχετικό μήνυμα εάν δεν υπάρχουν προς το παρόν φυτά στη βάση.
 
 
     @Override
@@ -37,9 +37,9 @@ public class GalleryActivity extends MainActivity {
             //εάν δεν υπάρχουν αντικείμενα στη βάση δεδομένων εμφανίζουμε το textView για την ενημέρωση του χρήστη
             textView.setVisibility(View.VISIBLE);
         }
-        //αναφορά στο recyclerView
+        //αναφορά στο recyclerView  που υπάρχει στο layout της δραστηριότητας
         recyclerView = findViewById(R.id.recyclerView);
-        //θέτουμε το layout των items στο RecyclerView
+        //δημιουργούμε και θέτουμε το layout των καρτών στο RecyclerView
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         //θέτουμε τον Adapter για το RecyclerView. Είναι το αντικείμενο της κλάσης RecyclerAdapter.
