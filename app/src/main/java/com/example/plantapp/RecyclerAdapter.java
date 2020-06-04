@@ -1,25 +1,21 @@
 package com.example.plantapp;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.plantapp.MyDBHandler.COLUMN_FERTILDATE;
-import static com.example.plantapp.MyDBHandler.COLUMN_PLANTINGDATE;
-import static com.example.plantapp.MyDBHandler.COLUMN_PLANTNAME;
 
 /**
  * Η κλάση Adapter για την εμφάνιση των αντικειμένων στο RecyclerView.
  * Υποχρεωτικά επεκτείνει την RecyclerView.
+ * Tutorial που παρακολουθήθηκαν για τον σκοπό αυτό:
+ *      theandroidwarriors.blogspot.com/2017/03/android-sqlite-database-tutorial.html
+ *      https://youtu.be/5ISNPFmuOU8?list=LLRbTzZCfU6YVocpwKOjXStQ
  */
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 

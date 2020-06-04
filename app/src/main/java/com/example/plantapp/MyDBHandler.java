@@ -20,9 +20,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME="plantDB.db";
     private static final String TABLE_PLANTS="plants";
     private static final String COLUMN_ID="_id";//id φυτού
-    public static final String COLUMN_PLANTNAME="plantName";//όνομα φυτού
-    public static final String COLUMN_PLANTINGDATE="plantingDate";//πότε φυτεύθηκε
-    public static final String COLUMN_FERTILDATE="fertilDate";//πότε ήταν η τελευταία φορά που λιπάνθηκε
+    private static final String COLUMN_PLANTNAME="plantName";//όνομα φυτού
+    private static final String COLUMN_PLANTINGDATE="plantingDate";//πότε φυτεύθηκε
+    private static final String COLUMN_FERTILDATE="fertilDate";//πότε ήταν η τελευταία φορά που λιπάνθηκε
 
     public MyDBHandler( Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
