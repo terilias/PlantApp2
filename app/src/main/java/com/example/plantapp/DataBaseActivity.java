@@ -45,12 +45,19 @@ public class DataBaseActivity extends MainActivity {
             CharSequence name=savedInstanceState.getCharSequence("plant's name");
             CharSequence pdate=savedInstanceState.getCharSequence("plant's date");
             CharSequence info=savedInstanceState.getCharSequence("plant's info");
+            boolean isTextViewVisible=savedInstanceState.getBoolean("is textView visible");
             //αλλάζουμε το πεδίο κειμένου για να περιέχει το όνομα και την ημερομηνία που είχε τοποθετήσει ο χρήστης πριν από την αλλαγή κατάστασης της συσκευής καθώς και τις πληροφορίες που έχουν εμφανιστεί στο textViewInfo
             plantName.setText(name);
             dateInput.setText(pdate);
-            textViewInfo.setText(info);
-            textViewInfo.setVisibility(View.VISIBLE);
-            textViewInfo.setMovementMethod(new ScrollingMovementMethod());//μέθοδος για να μπορεί το textView να είναι scrollable (ίσως χρειαστεί ώστε να μπορεί να εμφανίζεται και σε Landscape mode)
+            //εάν είχε εμφανιστεί το textView θα το εμφανίσουμε κι εδώ
+            if(isTextViewVisible) {
+                textViewInfo.setText(info);
+                textViewInfo.setVisibility(View.VISIBLE);
+                textViewInfo.setMovementMethod(new ScrollingMovementMethod());//μέθοδος για να μπορεί το textView να είναι scrollable (ίσως χρειαστεί ώστε να μπορεί να εμφανίζεται και σε Landscape mode)
+            }
+            else{
+                textViewInfo.setVisibility(View.INVISIBLE);
+            }
         }
         else{
             //αφού δεν έχει αρχικοποίηση το Bundle σημαίνει ότι τα πεδία εισαγωγής δεδομένων ξεκινάνε με κενό περιεχόμενο άρα φορτώνονται αυτόματα οι έτοιμες τιμές στα πεδία (hints)
@@ -77,7 +84,7 @@ public class DataBaseActivity extends MainActivity {
             Plant found=dbHandler.findPlant(name);
             //εάν δεν υπάρχει στη βάση το προσθέτουμε και κάνουμε το editText να έχει κενό
             if(found==null){
-                Plant plant=new Plant(plantName.getText().toString(),dateInput.getText().toString(),"Δεν έχει δεχθεί λίπανση.");//αρχικοποίηση της στήλης ημερομηνίας λιπάσματος είναι no fertilizer
+                Plant plant=new Plant(plantName.getText().toString(),dateInput.getText().toString(),"Δεν έχει λιπανθεί.");//αρχικοποίηση της στήλης ημερομηνίας λιπάσματος είναι το μήνυμα ότι δεν έχει λιπανθεί.Δεν το δέχεται με αναφορά στο R.strings
                 dbHandler.addPlant(plant);
                 Toast.makeText(getApplicationContext(), R.string.congrats, Toast.LENGTH_LONG).show();
             }
@@ -95,7 +102,7 @@ public class DataBaseActivity extends MainActivity {
      * H μέθοδος onClick για το searchButton.
      */
     public void searchPlant(View view){
-        textViewInfo.setVisibility(View.INVISIBLE);//το πεδίο στο οποίο θα εμφανιστούν οι πληροφορίες φυτού τίθεται σε αόρατο σε περίπτωση που είναι ορατό
+        textViewInfo.setVisibility(View.INVISIBLE);//το πεδίο στο οποίο θα εμφανιστούν οι πληροφορίες φυτού τίθεται σε αόρατο
         MyDBHandler dbHandler=new MyDBHandler(this,null,null,1);//το αντικείμενο για την επικοινωνία με τη βάση δεδομένων
         String name=plantName.getText().toString();//παίρνουμε το όνομα που έδωσε ο χρήστης
         name=name.trim();//αφαίρεση των κενών που υπάρχουν πριν και μετά το όνομα
@@ -109,7 +116,7 @@ public class DataBaseActivity extends MainActivity {
                 String fertilDate=String.valueOf(found.getFertilDate());
                //εμφάνιση των στοιχείων του φυτού σε ένα textView που by default είναι unvisible.
                 textViewInfo.setVisibility(View.VISIBLE);
-                if(fertilDate.equals("no fertilizer")){
+                if(fertilDate.equals("Δεν έχει λιπανθεί.")){
                     //για κάποιο λόγο δεν καταφέραμε να κάνουμε setText με μήνυμα από το R.string γιατί εμφανίζει τους αριθμούς του id
                     // όταν το προσθέτουμε σε υπόλοιπα strings. Οπότε εδώ το μήνυμα είναι hardcoded
                     textViewInfo.setText("Το φυτό "+plantName+" φυτεύθηκε στις "+plantDate+" και δεν έχει δεχθεί ακόμη λίπασμα. ");
@@ -131,7 +138,7 @@ public class DataBaseActivity extends MainActivity {
      * H μέθοδος onClick για το delButton.
      */
     public void delPlant(View view){
-        textViewInfo.setVisibility(View.INVISIBLE);//το πεδίο στο οποίο θα εμφανιστούν οι πληροφορίες φυτού τίθεται σε αόρατο σε περίπτωση που είναι ορατό
+        textViewInfo.setVisibility(View.INVISIBLE);//το πεδίο στο οποίο θα εμφανιστούν οι πληροφορίες φυτού τίθεται σε αόρατο
         final MyDBHandler dbHandler=new MyDBHandler(this,null,null,1);//το αντικείμενο για την επικοινωνία με τη βάση δεδομένων
         final String name=plantName.getText().toString().trim();//παίρνουμε το όνομα που έδωσε ο χρήστης με αφαίρεση των κενών που υπάρχουν πριν και μετά το όνομα
         //εάν το όνομα δεν είναι κενό και υπάρχει στη βάση δεδομένων, τότε εμφανίζεται μήνυμα προειδοποίησης για την επιβεβαίωση του χρήστη
@@ -194,6 +201,15 @@ public class DataBaseActivity extends MainActivity {
         CharSequence pdate=plantName.getText();
         outState.putCharSequence("plant's date",pdate);
         outState.putCharSequence("plant's info",textViewInfo.getText());
+        //επίσης κρατάμε σε ένα flag το εάν το textView είναι Visible για να ενεργήσουμε ανάλογα στην ανάκτηση
+        boolean isTextViewVisible;
+        if(textViewInfo.getVisibility()==View.VISIBLE){
+            isTextViewVisible=true;
+        }
+        else{
+            isTextViewVisible=false;
+        }
+        outState.putBoolean("is textView visible",isTextViewVisible);
     }
     /**
      * H μέθοδος αυτή εκτελείται για την τροποποίηση του μενού κατά το χρόνο εκτέλεσης της Activity.
