@@ -78,7 +78,6 @@ public class DataBaseActivity extends MainActivity {
         textViewInfo.setVisibility(View.INVISIBLE);//το πεδίο στο οποίο θα εμφανιστούν οι πληροφορίες φυτού τίθεται σε αόρατο
         MyDBHandler dbHandler=new MyDBHandler(this,null,null,1);//το αντικείμενο για την επικοινωνία με τη βάση δεδομένων
         String name=plantName.getText().toString();//παίρνουμε το όνομα που έδωσε ο χρήστης
-        name=name.trim();//αφαίρεση των κενών που υπάρχουν πριν και μετά το όνομα ώστε να μην αποθηκευθεί ξεχωριστή εγγραφή για φυτό με το ίδιο όνομα με υπάρχον, αλλά με κενά
         //εάν το όνομα δεν είναι κενό, το ψάχνουμε στη βάση δεδομένων μας
         if(!name.equals("")){
             Plant found=dbHandler.findPlant(name);
@@ -105,7 +104,6 @@ public class DataBaseActivity extends MainActivity {
         textViewInfo.setVisibility(View.INVISIBLE);//το πεδίο στο οποίο θα εμφανιστούν οι πληροφορίες φυτού τίθεται σε αόρατο
         MyDBHandler dbHandler=new MyDBHandler(this,null,null,1);//το αντικείμενο για την επικοινωνία με τη βάση δεδομένων
         String name=plantName.getText().toString();//παίρνουμε το όνομα που έδωσε ο χρήστης
-        name=name.trim();//αφαίρεση των κενών που υπάρχουν πριν και μετά το όνομα
         //εάν το όνομα δεν είναι κενό, το ψάχνουμε στη βάση δεδομένων μας
         if(!name.equals("") ){
             Plant found=dbHandler.findPlant(name);
@@ -140,7 +138,7 @@ public class DataBaseActivity extends MainActivity {
     public void delPlant(View view){
         textViewInfo.setVisibility(View.INVISIBLE);//το πεδίο στο οποίο θα εμφανιστούν οι πληροφορίες φυτού τίθεται σε αόρατο
         final MyDBHandler dbHandler=new MyDBHandler(this,null,null,1);//το αντικείμενο για την επικοινωνία με τη βάση δεδομένων
-        final String name=plantName.getText().toString().trim();//παίρνουμε το όνομα που έδωσε ο χρήστης με αφαίρεση των κενών που υπάρχουν πριν και μετά το όνομα
+        final String name=plantName.getText().toString();//παίρνουμε το όνομα που έδωσε ο χρήστης με αφαίρεση των κενών που υπάρχουν πριν και μετά το όνομα
         //εάν το όνομα δεν είναι κενό και υπάρχει στη βάση δεδομένων, τότε εμφανίζεται μήνυμα προειδοποίησης για την επιβεβαίωση του χρήστη
         if(!name.equals("") ) {
             Plant found=dbHandler.findPlant(name);//αναζήτηση του φυτού στη βάση δεδομένων

@@ -104,8 +104,7 @@ public class FertilizerActivity extends MainActivity {
         }
         else{
             //εάν βρισκόμαστε σε mode λιπάσματος συγκεκριμένου φυτού καλείται η μέθοδος fertilPlant από την myDBHandler
-            //δεν ξεχνώ να περάσω την είσοδο του χρήστη από το "κόσκινο" της μεθόδου trim γιατί έχω εξασφαλίσει με την χρήση της ίδιας μεθόδου, ότι δεν θα μπει στη βάση φυτό με κενά πριν και μετά την ονομασία του
-            if(!editTextFertilName.getText().toString().trim().equals("")) {
+            if(!editTextFertilName.getText().toString().equals("")) {
                 //πρώτα αναζήτηση του φυτού στη βάση δεδομένων
                 Plant found=dbHandler.findPlant(editTextFertilName.getText().toString());
                 if(found==null){
